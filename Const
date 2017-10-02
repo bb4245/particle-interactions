@@ -1,0 +1,9 @@
+classdef Const
+    properties (Constant)
+        dt = 5;
+        qe = 1 %1.6e-19;
+        me = 1 %9.1e-31;
+        mp = 1 %1.67e-27;
+        ke = 1 %8.99e9;
+    end
+end
