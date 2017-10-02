@@ -1,0 +1,30 @@
+classdef Particle < handle
+    properties
+        pos;
+        type;
+        v;
+        q;
+        m;
+    end
+    methods
+        function obj = Particle(pos,type,v,q,m)
+            obj.pos = pos;
+            obj.type = type;
+            obj.v = v;
+            obj.q = q*Const.qe;
+            if type=='e'
+                obj.m = m*Const.me;
+            else
+                obj.m = m*Const.mp;
+            end
+        end
+        function update_p(obj)
+            obj.pos = obj.pos + obj.v*Const.dt;
+        end
+        function update_v(obj,obj2)
+            r = obj2.pos - obj.pos;
+            a = -(r/norm(r))*Const.ke*obj.q*obj2.q/(obj.m*norm(r)^2);
+            obj.v = obj.v + Const.dt*a;
+        end
+    end
+end
