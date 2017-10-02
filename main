@@ -1,0 +1,30 @@
+clear
+particle_list = [];
+no_particles = 3;
+for i = 1:no_particles
+    %create thing that appends random numbers to position list :) 
+pos_list = {[-2.5,0],[0,0],[2.5,0]};
+type_list = {'e','p','e'};
+v_list = {[0,1],[0,0],[0,-1]};
+q_list = {-1,5,-1};
+m_list = {10000,10000000,10000};
+for p = 1:no_particles
+    particle_list = [particle_list,Particle(pos_list{p},type_list{p},v_list{p},q_list{p},m_list{p})];
+end
+    for i = 1:100
+        for elm = particle_list
+            plot(elm.pos(1),elm.pos(2),'r.');
+            hold on;
+        end
+        pause(0.01);
+        for i = 1:no_particles
+            for j = 1:no_particles
+                if i ~= j %not equal to
+                    particle_list(i).update_v(particle_list(j));
+                end
+                particle_list(i).update_p;
+            end
+        end
+    end
+end
+
